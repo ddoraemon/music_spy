@@ -66,6 +66,8 @@ class BackgroundDownload(threading.Thread):
         res = conn.getresponse()
         data = res.read()
         conn.close()
+        if not os.path.exists(self.music_folder):
+            os.makedirs(self.music_folder)
         with open("%s/%s" % (self.music_folder, file_name), "wb") as fp:
             fp.write(data)
         print "下载结束"
